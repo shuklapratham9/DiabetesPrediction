@@ -7,60 +7,62 @@ from sklearn.model_selection import train_test_split
 # Load the dataset
 df = pd.read_csv(r"./diabetes.csv")
 
-# Header with professional theme
+# New color palette and styling
 st.markdown("""
     <style>
         body {
-            background-color: #f5f5f5;
+            background-color: #e6f2ff;
+            font-family: 'Montserrat', sans-serif;
         }
         .header {
             font-size: 50px;
-            font-family: 'Verdana', sans-serif;
             font-weight: bold;
             text-align: center;
-            color: #0c4b33;
+            color: #2c3e50;
             margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         .sub-header {
             font-size: 22px;
-            font-family: 'Verdana', sans-serif;
-            color: #4a7c59;
+            color: #34495e;
             text-align: center;
             margin-bottom: 15px;
         }
         .highlight {
             font-size: 18px;
-            color: #0c4b33;
+            color: #16a085;
             font-weight: bold;
         }
         hr {
             border: none;
-            border-top: 2px solid #8bc34a;
+            border-top: 3px solid #3498db;
             margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stSidebar {
+            background-color: #d6e9f3;
+            border-right: 2px solid #3498db;
         }
     </style>
+""", unsafe_allow_html=True)
+
+# Header with new styling
+st.markdown("""
     <div class="header">🩺 Diabetes Risk Checker</div>
-    <div class="sub-header">Enter your health details to analyze your diabetes risk.</div>
+    <div class="sub-header">Analyze your health risk with advanced machine learning</div>
     <hr>
 """, unsafe_allow_html=True)
 
-# Sidebar inputs with a refined design
-st.sidebar.title("📝 Patient Information")
+# Sidebar inputs with refined design
 st.sidebar.markdown("""
     <style>
-        .sidebar .sidebar-content {
-            background-color: #f7f8f9;
-        }
-        .stSidebar {
-            background-color: #e1e5ea;
+        .sidebar-content {
+            background-color: #f0f8ff;
         }
     </style>
 """, unsafe_allow_html=True)
 
-st.sidebar.header("🔍 Enter Your Health Details:")
-
-
-st.sidebar.header("🔍 Enter Your Health Details:")
+st.sidebar.header("🔍 Patient Health Profile:")
 
 def get_user_input():
     pregnancies = st.sidebar.number_input('Pregnancies', min_value=0, max_value=17, value=3, step=1)
@@ -88,9 +90,9 @@ def get_user_input():
 
 user_data = get_user_input()
 
-# Data Summary
-st.markdown("<h2 style='color: #0c4b33;'>🔬 Health Data Overview</h2>", unsafe_allow_html=True)
-st.table(user_data)  # Display the input data in a table format
+# Data Summary with new styling
+st.markdown("<h2 style='color: #2980b9;'>🔬 Health Data Overview</h2>", unsafe_allow_html=True)
+st.table(user_data)
 
 # Split the data
 x = df.drop(['Outcome'], axis=1)
@@ -101,27 +103,30 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 rf = RandomForestClassifier()
 rf.fit(x_train, y_train)
 
-# Button styles and prediction
+# Button and prediction styles
 st.markdown("""
     <style>
         .stButton>button {
-            background-color: #0c4b33;
+            background-color: #3498db;
             color: white;
             font-size: 20px;
             padding: 10px;
             border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .stButton>button:hover {
-            background-color: #145c45;
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
         }
     </style>
 """, unsafe_allow_html=True)
 
 # Button for prediction
 if st.button('📊 Analyze Risk'):
-    st.markdown("<h3 style='text-align: center; color: #4a7c59;'>🔄 Analyzing your health data...</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #2c3e50;'>🔄 Analyzing your health data...</h3>", unsafe_allow_html=True)
     
     progress = st.progress(0)
     for percent in range(100):
@@ -130,13 +135,13 @@ if st.button('📊 Analyze Risk'):
     prediction = rf.predict(user_data)
     
     st.markdown("<hr>", unsafe_allow_html=True)
-    st.markdown("<h2 style='color: #0c4b33;'>📋 Prediction Result</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: #2980b9;'>📋 Prediction Result</h2>", unsafe_allow_html=True)
     result = 'You are not diabetic.' if prediction[0] == 0 else 'You are **at risk of diabetes.**'
     st.markdown(f"<p class='highlight'>{result}</p>", unsafe_allow_html=True)
     
     # Display model accuracy
     accuracy = accuracy_score(y_test, rf.predict(x_test)) * 100
-    st.markdown(f"<p style='color: #4a7c59; font-size: 18px;'>Model Accuracy: {accuracy:.2f}%</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: #34495e; font-size: 18px;'>Model Accuracy: {accuracy:.2f}%</p>", unsafe_allow_html=True)
 
 else:
-    st.markdown("<h3 style='text-align: center; color: #4a7c59;'>👈 Enter your data and click 'Analyze Risk'</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #2c3e50;'>👈 Enter your data and click 'Analyze Risk'</h3>", unsafe_allow_html=True)
