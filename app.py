@@ -19,14 +19,14 @@ st.markdown("""
             font-weight: bold;
             text-align: center;
             color: #0c4b33;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .sub-header {
             font-size: 22px;
             font-family: 'Verdana', sans-serif;
             color: #4a7c59;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .highlight {
             font-size: 18px;
@@ -36,6 +36,7 @@ st.markdown("""
         hr {
             border: none;
             border-top: 2px solid #8bc34a;
+            margin-bottom: 30px;
         }
     </style>
     <div class="header">🩺 Diabetes Risk Checker</div>
@@ -55,6 +56,9 @@ st.sidebar.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+
+st.sidebar.header("🔍 Enter Your Health Details:")
+
 
 st.sidebar.header("🔍 Enter Your Health Details:")
 
