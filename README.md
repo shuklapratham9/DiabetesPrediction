@@ -1,1 +1,1 @@
-https://diabetesprediction-a2ycfnkfp6c8rhxy8jmhcl.streamlit.app/
+https://diabetesprediction-dq9ew3qsdxazwlmbsj5ja5.streamlit.app/
